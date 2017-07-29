@@ -1,4 +1,6 @@
 # Supersonic Ads Cordova Plugin
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/Dexus/cordova-plugin-ironSource.svg)](https://greenkeeper.io/)
 Add support for [Supersonic Ads](https://www.supersonic.com/) to your Cordova and Phonegap based mobile apps.
 
 ## How do I install it? ##
