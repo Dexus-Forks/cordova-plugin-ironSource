@@ -1,0 +1,13 @@
+repositories {
+  maven {
+    url "https://dl.bintray.com/ironsource-mobile/android-sdk"
+    url "https://dl.bintray.com/ironsource-mobile/android-adapters"
+  }
+}
+
+cdvPluginPostBuildExtras.add({
+  dependencies {
+    compile 'com.ironsource.sdk:mediationsdk:6.6.3@jar'
+    compile 'com.ironsource.adapters:inmobiadapter:3.2.0@jar'
+  }
+});

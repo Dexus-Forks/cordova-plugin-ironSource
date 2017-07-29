@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-ironsource" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>cordova-plugin-ironsource</name>
+    <description>Add support for ironSource ads in a Cordova app</description>
+    <js-module src="www/ironsource.js" name="IronSourceAds">
+        <clobbers target="IronSourceAds" />
+    </js-module>
+
+    <engines>
+        <engine name="cordova" version=">=3.0" />
+        <engine name="cordova-android" version=">=4.0.0" />
+        <engine name="cordova-ios" version=">=4.0.0" />
+    </engines>
+
+    <platform name="android">
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="IronSourceAdsPlugin">
+                <param name="android-package" value="com.deineagentur.cordova.plugin.ironsource.IronSourceAdsPlugin" />
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+          <uses-permission android:name="android.permission.INTERNET" />
+          <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity
+            android:name="com.ironsource.sdk.controller.ControllerActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true" />
+            <activity
+            android:name="com.ironsource.sdk.controller.InterstitialActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.Translucent" />
+            <activity
+            android:name="com.ironsource.sdk.controller.OpenUrlActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.Translucent" />
+            <meta-data android:name="com.google.android.gms.version"
+android:value="@integer/google_play_services_version" />
+            <activity
+            android:name="com.inmobi.rendering.InMobiAdActivity"
+            android:configChanges="keyboardHidden|orientation keyboard|smallestScreenSize|screenSize|screenLayout"
+            android:hardwareAccelerated="true"
+            android:resizeableActivity="false"
+            android:theme="@android:style/Theme.NoTitleBar"
+            tools:ignore="UnusedAttribute" />
+            <receiver
+            android:name="com.inmobi.commons.core.utilities.uid.ImIdShareBroadCastReceiver"
+            android:enabled="true"
+            android:exported="true"
+            tools:ignore="ExportedReceiver">
+            <intent-filter>
+            <action android:name="com.inmobi.share.id"/>
+            </intent-filter>
+            </receiver>
+        </config-file>
+
+        <source-file src="src/android/IronSourceAdsPlugin.java"
+            target-dir="src/com/deineagentur/cordova/plugin/ironsource" />
+        <framework src="src/android/ironsourceads.gradle" custom="true" type="gradleReference" />
+        <framework src="com.google.android.gms:play-services-ads:+" />
+    </platform>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="IronSourceAdsPlugin">
+                <param name="ios-package" value="IronSourceAdsPlugin" />
+            </feature>
+        </config-file>
+        <header-file src="src/ios/IronSourceAdsPlugin.h" />
+        <source-file src="src/ios/IronSourceAdsPlugin.m" />
+        <framework src="src/ios/IronSource.framework" custom="true" />
+        <framework src="Foundation.framework" />
+        <framework src="AVFoundation.framework" />
+        <framework src="CoreMedia.framework" />
+        <framework src="CoreVideo.framework" />
+        <framework src="QuartzCore.framework" />
+        <framework src="SystemConfiguration.framework" />
+        <framework src="CoreGraphics.framework" />
+        <framework src="CFNetwork.framework" />
+        <framework src="MobileCoreServices.framework" />
+        <framework src="libz.dylib" />
+        <framework src="StoreKit.framework" />
+        <framework src="AdSupport.framework" />
+        <framework src="CoreLocation.framework" />
+        <framework src="CoreTelephony.framework" />
+        <framework src="Security.framework" />
+    </platform>
+</plugin>

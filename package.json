@@ -1,0 +1,20 @@
+{
+  "name": "cordova-plugin-ironsource",
+  "version": "0.0.1",
+  "description": "Ads support for ironSource ads to Cordova and Phonegap apps",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dexus/cordova-plugin-ironSource.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "Josef \"Dexus\" Fröhle",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Dexus/cordova-plugin-ironSource/issues"
+  },
+  "homepage": "https://github.com/Dexus/cordova-plugin-ironSource"
+}
