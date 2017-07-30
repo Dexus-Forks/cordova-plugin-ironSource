@@ -1,35 +1,26 @@
 package com.deineagentur.cordova.plugin.ironsource;
 
 import android.util.Log;
-import android.webkit.WebView;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
-import org.apache.cordova.PluginResult;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import com.ironsource.sdk.SSAFactory;
 import com.ironsource.adapters.supersonicads.SupersonicConfig;
-import com.ironsource.mediationsdk.EBannerSize;
 import com.ironsource.mediationsdk.IronSource;
-import com.ironsource.mediationsdk.IronSourceBannerLayout;
 import com.ironsource.mediationsdk.integration.IntegrationHelper;
 import com.ironsource.mediationsdk.logger.IronSourceError;
 import com.ironsource.mediationsdk.model.InterstitialPlacement;
 import com.ironsource.mediationsdk.model.Placement;
-import com.ironsource.mediationsdk.sdk.BannerListener;
 import com.ironsource.mediationsdk.sdk.InterstitialListener;
 import com.ironsource.mediationsdk.sdk.OfferwallListener;
 import com.ironsource.mediationsdk.sdk.RewardedVideoListener;
-import com.ironsource.mediationsdk.utils.IronSourceUtils;
-
 
 public class IronSourceAdsPlugin extends CordovaPlugin implements RewardedVideoListener, OfferwallListener, InterstitialListener {
-    private CallbackContext eventContext;
     private static final String TAG = "[IronSourceAdsPlugin]";
 
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
@@ -40,35 +31,49 @@ public class IronSourceAdsPlugin extends CordovaPlugin implements RewardedVideoL
     @Override
     public void onPause(boolean multitasking) {
         super.onPause(multitasking);
+        Log.d(TAG, "onPause");
         IronSource.onPause(this.cordova.getActivity());
     }
 
     @Override
     public void onResume(boolean multitasking) {
         super.onResume(multitasking);
+        Log.d(TAG, "onResume");
         IronSource.onResume(this.cordova.getActivity());
     }
 
     @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
+        Log.d(TAG, "Execute: " + action);
 
-        if(action.equals("subscribeOnNotifications")) {
-            return this.subscribeOnNotifications(callbackContext);
-        } else if(action.equals("init")) {
-            String appKey = args.getString(0);
-            String userId = args.getString(1);
-            return this.init(appKey, userId);
+        if(action.equals("init")) {
+            final String appKey = args.getString(0);
+            final String userId = args.getString(1);
+            final IronSourceAdsPlugin vthis = this;
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    Boolean s = vthis.init(appKey, userId);
+                    callbackContext.success();
+                }
+            });
+            return true;
         } else if(action.equals("showRewardedVideo")) {
-            String placementName = null;
+            String placementName = "DefaultRewardedVideo";
             if (args.length() == 1) {
                 placementName = args.getString(0);
             }
             return this.showRewardedVideo(placementName);
         } else if(action.equals("getRewardedVideoPlacementInfo")) {
-            String placementName = args.getString(0);
+            String placementName = "DefaultRewardedVideo";
+            if (args.length() == 1) {
+                placementName = args.getString(0);
+            }
             return this.getRewardedVideoPlacementInfo(placementName, callbackContext);
         } else if(action.equals("isRewardedVideoPlacementCapped")) {
-            String placementName = args.getString(0);
+            String placementName = "DefaultRewardedVideo";
+            if (args.length() == 1) {
+                placementName = args.getString(0);
+            }
             return this.isRewardedVideoPlacementCapped(placementName, callbackContext);
         } else if(action.equals("setDynamicUserId")) {
             String userId = args.getString(0);
@@ -78,33 +83,29 @@ public class IronSourceAdsPlugin extends CordovaPlugin implements RewardedVideoL
         } else if(action.equals("isInterstitialReady")) {
             return this.isInterstitialReady(callbackContext);
         } else if(action.equals("getInterstitialPlacementInfo")) {
-            String placementName = args.getString(0);
+            String placementName = "DefaultInterstitial";
+            if (args.length() == 1) {
+                placementName = args.getString(0);
+            }
             return this.getInterstitialPlacementInfo(placementName, callbackContext);
         }  else if (action.equals("validateIntegration")) {
             IntegrationHelper.validateIntegration(this.cordova.getActivity());
             callbackContext.success();
             return true;
         } else if(action.equals("showInterstitial")) {
-            String placementName = null;
+            String placementName = "DefaultInterstitial";
             if (args.length() == 1) {
                 placementName = args.getString(0);
             }
             return this.showInterstitial(placementName);
         } else if(action.equals("showOfferwall")) {
-            String placementName = null;
+            String placementName = "DefaultOfferWall";
             if (args.length() == 1) {
                 placementName = args.getString(0);
             }
             return this.showOfferwall(placementName);
         }
         return false;
-    }
-
-    private boolean subscribeOnNotifications(CallbackContext callbackContext) {
-        if (eventContext == null) {
-            eventContext = callbackContext;
-        }
-        return true;
     }
 
     private void fireEvent(final String event) {
@@ -375,7 +376,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin implements RewardedVideoL
             data.put("errorMessage", ironSourceError.getErrorMessage());
         } catch (JSONException e) {
         }
-        this.fireEvent("onInterstitialAdLoadFailed", data);
+        this.fireEvent("onInterstitialAdShowFailed", data);
     }
 
     @Override

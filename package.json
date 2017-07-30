@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-ironsource",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Ads support for ironSource ads to Cordova and Phonegap apps",
   "repository": {
     "type": "git",
