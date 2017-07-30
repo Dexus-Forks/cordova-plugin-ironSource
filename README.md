@@ -1,25 +1,26 @@
-# Supersonic Ads Cordova Plugin
+# IronSource Ads Cordova Plugin
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/Dexus/cordova-plugin-ironSource.svg)](https://greenkeeper.io/)
-Add support for [Supersonic Ads](https://www.supersonic.com/) to your Cordova and Phonegap based mobile apps.
+
+Add support for [IronSource Ads](https://www.IronSource.com/) to your Cordova and Phonegap based mobile apps.
 
 ## How do I install it? ##
 
 If you're like me and using [CLI](http://cordova.apache.org/):
 ```
-cordova plugin add cordova-plugin-supersonicads
+cordova plugin add cordova-plugin-ironsource
 ```
 
 or
 
 ```
-cordova plugin add https://github.com/blakgeek/cordova-plugin-supersonicads
+cordova plugin add https://github.com/blakgeek/cordova-plugin-ironSource
 ```
 
 or
 
 ```
-phonegap local plugin add https://github.com/blakgeek/cordova-plugin-supersonicads
+phonegap local plugin add https://github.com/blakgeek/cordova-plugin-ironSource
 ```
 
 ## How do I use it? ##
@@ -27,32 +28,32 @@ phonegap local plugin add https://github.com/blakgeek/cordova-plugin-supersonica
 ```javascript
 document.addEventListener('deviceready', function() {
 
-	var ssAds = new SupersonicAds("yo_app_key", "some_unique_userid");
+	var isAds = new IronSourceAds("yo_app_key", "some_unique_userid");
 	
 	// show a rewarded ad
-	ssAds.showRewardedAd();
+	isAds.showRewardedAd();
     	
 	// show a rewarded ad for placement RightHere
-	ssAds.showRewardedAd("RightHere");
+	isAds.showRewardedAd("RightHere");
     
 	// show an offerwall
-    ssAds.showOfferWall();
+    isAds.showOfferWall();
     
     // show an interstitial
-    ssAds.showInterstitial();
+    isAds.showInterstitial();
 
     // launch in Android Studio/Xcode mediation integration verification
-    ssAds.validateIntegration();
+    isAds.validateIntegration();
 
     // Check is a rewarded video is available to show
-    ssAds.isRewardedVideoAvailable(function () {
+    isAds.isRewardedVideoAvailable(function () {
     	alert('Yes');
 	}, function () {
 		alert('No');
 	});
 
 	// Check is an interstitial is available to show
-    ssAds.isInterstitialAdAvailable(function () {
+    isAds.isInterstitialAdAvailable(function () {
     	alert('Yes');
 	}, function () {
 		alert('No');	
@@ -92,7 +93,7 @@ document.addEventListener('deviceready', function() {
 ```
 
 ## Can I just see a working example?
-Yep.  Check out the [demo project](https://github.com/blakgeek/cordova-plugin-supersonicads-demo).  It runs on both Android and iOS.
+Yep.  Check out the [demo project](https://github.com/Dexus/cordova-plugin-ironSource-demo).  It runs on both Android and iOS.
 
 ## What other events are supported?
 ### Interstitial

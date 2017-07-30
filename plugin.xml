@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-ironsource" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="cordova-plugin-ironsource" version="0.0.4" xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
     <name>cordova-plugin-ironsource</name>
     <description>Add support for ironSource ads in a Cordova app</description>
-    <js-module src="www/ironsource.js" name="IronSourceAds">
+    <js-module src="www/ironsourceads.js" name="IronSourceAds">
         <clobbers target="IronSourceAds" />
     </js-module>
 
@@ -41,23 +41,7 @@
             android:hardwareAccelerated="true"
             android:theme="@android:style/Theme.Translucent" />
             <meta-data android:name="com.google.android.gms.version"
-android:value="@integer/google_play_services_version" />
-            <activity
-            android:name="com.inmobi.rendering.InMobiAdActivity"
-            android:configChanges="keyboardHidden|orientation keyboard|smallestScreenSize|screenSize|screenLayout"
-            android:hardwareAccelerated="true"
-            android:resizeableActivity="false"
-            android:theme="@android:style/Theme.NoTitleBar"
-            tools:ignore="UnusedAttribute" />
-            <receiver
-            android:name="com.inmobi.commons.core.utilities.uid.ImIdShareBroadCastReceiver"
-            android:enabled="true"
-            android:exported="true"
-            tools:ignore="ExportedReceiver">
-            <intent-filter>
-            <action android:name="com.inmobi.share.id"/>
-            </intent-filter>
-            </receiver>
+            android:value="@integer/google_play_services_version" />
         </config-file>
 
         <source-file src="src/android/IronSourceAdsPlugin.java"

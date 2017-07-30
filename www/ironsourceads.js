@@ -1,30 +1,38 @@
-function IronSourceAds(appKey, userId) {
-
-	cordova.exec(null, null, 'IronSourceAdsPlugin', 'init', [appKey, userId]);
-
-	this.showRewardedAd = function(placementName, claimSpace, successCallback, failureCallback) {
-		cordova.exec(successCallback, failureCallback, 'IronSourceAdsPlugin', 'showRewardedAd', [placementName]);
+function IronSourceAds(appKey, userId, successCallback) {
+	cordova.exec(successCallback, null, 'IronSourceAdsPlugin', 'init', [appKey, userId]);
+	this.showRewardedVideo = function(placementName, successCallback, failureCallback) {
+		cordova.exec(successCallback, failureCallback, 'IronSourceAdsPlugin', 'showRewardedVideo', [placementName]);
 	};
-
-	this.showInterstitial = function(successCallback, failureCallback) {
-		cordova.exec(successCallback, failureCallback, 'IronSourceAdsPlugin', 'showInterstitial', []);
+	this.getRewardedVideoPlacementInfo = function(placementName, successCallback, failureCallback) {
+		cordova.exec(successCallback, failureCallback, 'IronSourceAdsPlugin', 'getRewardedVideoPlacementInfo', [placementName]);
 	};
-
-	this.showOfferwall = function(successCallback, failureCallback) {
-		cordova.exec(successCallback, failureCallback, 'IronSourceAdsPlugin', 'showOfferwall', []);
-	};
-
+    this.isRewardedVideoPlacementCapped = function(placementName, successCallback, failureCallback) {
+        cordova.exec(successCallback, failureCallback, 'IronSourceAdsPlugin', 'isRewardedVideoPlacementCapped', [placementName]);
+    };
 	this.validateIntegration = function(successCallback, failureCallback) {
 		cordova.exec(successCallback, failureCallback, 'IronSourceAdsPlugin', 'validateIntegration', []);
 	};
-
-	this.isRewardedVideoAvailable = function(successCallback, failureCallback) {
-		cordova.exec(successCallback, failureCallback, 'IronSourceAdsPlugin', 'isRewardedVideoAvailable', []);
-	};
-
-	this.isInterstitialAdAvailable = function(successCallback, failureCallback) {
-		cordova.exec(successCallback, failureCallback, 'IronSourceAdsPlugin', 'isInterstitialAdAvailable', []);
-	};
+	this.setDynamicUserId = function(userId) {
+        cordova.exec(null, null, 'IronSourceAdsPlugin', 'setDynamicUserId', [userId]);
+    };
+    this.loadInterstitial = function() {
+        cordova.exec(null, null, 'IronSourceAdsPlugin', 'loadInterstitial', []);
+    };
+    this.isInterstitialReady = function(successCallback, failureCallback) {
+        cordova.exec(successCallback, failureCallback, 'IronSourceAdsPlugin', 'isInterstitialReady', []);
+    };
+    this.getInterstitialPlacementInfo = function(placementName, successCallback, failureCallback) {
+        cordova.exec(successCallback, failureCallback, 'IronSourceAdsPlugin', 'getInterstitialPlacementInfo', [placementName]);
+    };
+    this.showInterstitial = function(placementName) {
+        cordova.exec(null, null, 'IronSourceAdsPlugin', 'showInterstitial', [placementName]);
+    };
+    this.showOfferwall = function(placementName) {
+        cordova.exec(null, null, 'IronSourceAdsPlugin', 'showOfferwall', [placementName]);
+    };
+    this.subscribeOnNotifications = function(successCallback) {
+        cordova.exec(successCallback, null, 'IronSourceAdsPlugin', 'subscribeOnNotifications', []);
+    };
 }
 
 if(typeof module !== undefined && module.exports) {
