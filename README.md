@@ -95,32 +95,29 @@ document.addEventListener('deviceready', function() {
 ## Can I just see a working example?
 Yep.  Check out the [demo project](https://github.com/Dexus/cordova-plugin-ironSource-demo).  It runs on both Android and iOS.
 
-## What other events are supported?
+## What events are supported?
 ### Interstitial
-1. interstitialInitialized
-1. interstitialInitializationFailed
-1. interstitialAvailabilityChanged
-1. interstitialShown
-1. interstitialShowFailed
-1. interstitialClicked
-1. interstitialClosed
+1. onInterstitialAdClicked
+1. onInterstitialAdClosed
+1. onInterstitialAdLoadFailed
+1. onInterstitialAdOpened
+1. onInterstitialAdReady
+1. onInterstitialAdShowFailed
+1. onInterstitialAdShowSucceeded
 
 ### Offerwall
-1. offerwallClosed
-1. offerwallCreditFailed
-1. offerwallCreditReceived
-1. offerwallShowFailed
-1. offerwallOpened
-1. offerwallInitializationFailed
-1. offerwallInitialized
+1. onOfferwallAdCredited
+1. onGetOfferwallCreditsFailed
+1. onOfferwallAvailable
+1. onOfferwallClosed
+1. onOfferwallOpened
+1. onOfferwallShowFailed
 
 ### Rewarded Video
-1. rewardedVideoRewardReceived
-1. rewardedVideoEnded
-1. rewardedVideoStarted
-1. rewardedVideoAvailabilityChanged
-1. rewardedVideoClosed
-1. rewardedVideoOpened
-1. rewardedVideoInitializationFailed
-1. rewardedVideoInitialized
-1. rewardedVideoFailed
+1. onRewardedVideoAdClosed
+1. onRewardedVideoAdEnded
+1. onRewardedVideoAdOpened
+1. onRewardedVideoAdRewarded
+1. onRewardedVideoAdShowFailed
+1. onRewardedVideoAdStarted
+1. onRewardedVideoAvailabilityChanged
